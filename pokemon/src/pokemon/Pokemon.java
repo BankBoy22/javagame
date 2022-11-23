@@ -1,35 +1,36 @@
 package pokemon;
 
-import java.awt.Graphics;
-import java.awt.Image;
 
-import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class Pokemon {
-	JFrame frame = new JFrame("Æ÷ÄÏ¸ó½ºÅÍ"); //ÇÁ·¹ÀÓ »ı¼º
+	JFrame frame = new JFrame("Pokemon"); 
 	int WIDTH=1200;
 	int HEIGHT=800;
-	private Image background = new ImageIcon(Pokemon.class.getResource(null));
-	JButton btn1 = new JButton("½ÃÀÛ");
-	JButton btn2 = new JButton("Á¾·á");
+	JButton btn1 = new JButton("ì‹œì‘");
+	JButton btn2 = new JButton("ì¢…ë£Œ");
 	public Pokemon() {
-		frame.setSize(WIDTH,HEIGHT);//ÇÁ·¹ÀÓ Å©±â ¼³Á¤
-		frame.setLocationRelativeTo(null);//ÇÁ·¹ÀÓ È­¸é °¡¿îµ¥ ¹èÄ¡
+		frame.setSize(WIDTH,HEIGHT);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		btn1.setBounds(200,500,300,150);
 		btn2.setBounds(700,500,300,150);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btn1);
 		frame.getContentPane().add(btn2);
+		//í™”ë©´ì„ ë°”ê¾¸ëŠ” ë²„íŠ¼
+		btn1.addActionListener((ActionListener) new Battel());
+		//í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•˜ëŠ” ë²„íŠ¼
+		btn2.addActionListener((ActionListener) new Battel());
+		frame.setVisible(true);
 	}
 	
 	public void go() {
 		frame.setVisible(true);
 	}
 	
-	public void paint(Graphics g) {
-		g.drawImage();
-	}
+
 }
