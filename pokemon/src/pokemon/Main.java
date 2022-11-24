@@ -18,7 +18,7 @@ public class Main extends JFrame {
 	
 	static JPanel page1=new JPanel() {
 		private Image ima = 
-			new ImageIcon(Main.class.getResource("../image/poke.png")).getImage();//����̹���
+			new ImageIcon(Main.class.getResource("./image/poke.png")).getImage();//����̹���
 			public void paint(Graphics g) { //�׸��� �Լ�
 				g.drawImage(ima, 300, 100, null); //image�� �׷���
 			}
