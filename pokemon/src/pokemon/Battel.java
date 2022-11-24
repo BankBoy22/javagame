@@ -55,6 +55,30 @@ public class Battel {
                 //포켓몬 선택 화면을 지우고
             }
         });
+        //파이리 선택 버튼 이벤트
+        btn2.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frame.getContentPane().removeAll();
+                frame.repaint();
+                //포켓몬 선택 화면을 지우고
+            }
+        });
+        //이상해씨 선택 버튼 이벤트
+        btn3.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frame.getContentPane().removeAll();
+                frame.repaint();
+                //포켓몬 선택 화면을 지우고
+            }
+        });
+        //꼬부기 선택 버튼 이벤트
+        btn4.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frame.getContentPane().removeAll();
+                frame.repaint();
+                //포켓몬 선택 화면을 지우고
+            }
+        });
 
     }
     public void setVisible(boolean b) {
