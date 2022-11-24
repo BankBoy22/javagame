@@ -16,12 +16,17 @@ public class Battel {
     JFrame frame = new JFrame("Pokemon");
     int WIDTH=1200;
     int HEIGHT=800;
-    JLabel label = new JLabel("포켓몬을 선택하세요");
+    String player_name = "플레이어";
+    String enemy_name = "라이벌";
+    JLabel player_name_label = new JLabel(player_name);
+    JLabel enemy_name_label = new JLabel(enemy_name);
+    JLabel select_label = new JLabel("포켓몬을 선택하세요");
     public Battel() {
         frame.setSize(WIDTH,HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setResizable(false);
         //포켓몬 선택 화면
         frame.getContentPane().setLayout(null);
         //피카츄 선택 버튼
@@ -45,8 +50,8 @@ public class Battel {
         btn4.setBackground(java.awt.Color.BLUE);
         frame.getContentPane().add(btn4);
         //포켓몬을 선택하세요 텍스트 상단에 띄우기
-        label.setBounds(500, 50, 200, 50);
-        frame.getContentPane().add(label);
+        select_label.setBounds(500, 50, 200, 50);
+        frame.getContentPane().add(select_label);
         //피카츄 선택 버튼 이벤트
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
