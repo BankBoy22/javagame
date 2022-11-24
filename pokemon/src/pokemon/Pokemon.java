@@ -25,7 +25,6 @@ public class Pokemon {
 		btn1.addActionListener((ActionListener) new Battel());
 		//프로그램을 종료하는 버튼
 		btn2.addActionListener((ActionListener) new Battel());
-		frame.setVisible(true);
 	}
 	
 	public void go() {

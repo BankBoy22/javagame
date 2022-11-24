@@ -4,9 +4,10 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Main {
-	JFrame frame = new JFrame("Æ÷ÄÏ¸ó½ºÅÍ"); //ÇÁ·¹ÀÓ »ı¼º
+public class Main extends JFrame {
+	JFrame frame = new JFrame("Pokemon"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	int WIDTH=1200;
 	int HEIGHT=800;
@@ -14,14 +15,19 @@ public class Main {
 	JButton btn1 = new JButton("START");
 	JButton btn2 = new JButton("QUIT");
 	
-	private Image ima = 
-			new ImageIcon(Main.class.getResource("/image/poke.png")).getImage();//¹è°æÀÌ¹ÌÁö
+	static JPanel page1=new JPanel() {
+		private Image ima = 
+			new ImageIcon(Main.class.getResource("../image/poke.png")).getImage();//ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½
+			public void paint(Graphics g) { //ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+				g.drawImage(ima, 300, 100, null); //imageï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½
+			}
+	};
 	
 	
 	public Main() {
-		frame.setResizable(false);
-		frame.setSize(WIDTH,HEIGHT); //ÇÁ·¹ÀÓ Å©±â ¼³Á¤
-		frame.setLocationRelativeTo(null); //ÇÁ·¹ÀÓ È­¸é °¡¿îµ¥ ¹èÄ¡
+		frame.setResizable(false); //ì°½ì˜ í¬ê¸°ë¥¼ ë³€ê²½í•˜ì§€ ì•ŠìŒ
+		frame.setSize(WIDTH,HEIGHT); //í”„ë ˆì„ì˜ í¬ê¸°ë¥¼ ì„¤ì •
+		frame.setLocationRelativeTo(null); //ì°½ì´ ê°€ìš´ë° ë‚˜ì˜¤ê²Œ
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -29,13 +35,14 @@ public class Main {
 		btn2.setBounds(800,600,200,50);
 		
 		frame.getContentPane().setLayout(null);
-		
+		page1.setLayout(null);
+		page1.setBounds(
+				0, 0, WIDTH, HEIGHT);
+		frame.getContentPane().add(page1);
 		frame.getContentPane().add(btn1);
 		frame.getContentPane().add(btn2);
 	}
-	public void paint(Graphics g) { //±×¸®´Â ÇÔ¼ö
-		g.drawImage(ima, 300, 100, null); //image¸¦ ±×·ÁÁÜ
-	}
+	
 
 	public void go() {
 		frame.setVisible(true);
