@@ -35,12 +35,18 @@ public class Pokemon {
 		frame.add(page1);
 		frame.getContentPane().add(btn1);
 		frame.getContentPane().add(btn2);
-		//버튼 1을 누르면 Battel 클래스 프레임 켜기
+		//버튼 1을 누르면 플레이어 이름과 라이벌 이름을 입력받는 NickName 클래스로 넘어감
 		btn1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				Battel battle = new Battel();
-				battle.setVisible(true);
+				NickName nick = new NickName();
+				nick.go();
 				frame.setVisible(false);
+			}
+		});
+		//버튼 2를 누르면 프로그램이 종료됨
+		btn2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				System.exit(0);
 			}
 		});
 	}
