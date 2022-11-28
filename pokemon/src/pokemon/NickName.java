@@ -1,4 +1,4 @@
-
+package pokemon;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -14,7 +14,7 @@ public class NickName extends JFrame{
 	int HEIGHT=800;
 	
 	JPanel p = new JPanel();
-	Font font = new Font("HY°ß¸íÁ¶",Font.BOLD,30);
+	Font font = new Font("HYï¿½ß¸ï¿½ï¿½ï¿½",Font.BOLD,30);
 	
 	public void go() {
 		setTitle("Pokemon");
@@ -22,8 +22,8 @@ public class NickName extends JFrame{
 		
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		JLabel l1 = new JLabel("³ªÀÇ ÀÌ¸§ : ", JLabel.CENTER);
-		JLabel l2 = new JLabel("»ó´ë¹æÀÇ ÀÌ¸§ : ", JLabel.RIGHT);
+		JLabel l1 = new JLabel("ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ : ", JLabel.CENTER);
+		JLabel l2 = new JLabel("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ : ", JLabel.RIGHT);
 		
 		l1.setFont(font);
 		l2.setFont(font);
