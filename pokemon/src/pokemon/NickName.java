@@ -1,7 +1,10 @@
 package pokemon;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +20,15 @@ public class NickName extends JFrame{
 	String rival;
 	
 	JPanel frame = new JPanel();
-	Font font = new Font("HY�߸���",Font.BOLD,30);
+	Font font = new Font("HY견명조",Font.BOLD,30);
+
+	static JPanel page1=new JPanel(){
+		Image background=new ImageIcon(Main.class.getResource("./image/nickname.png")).getImage();
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(background, 0, 0, null); //image�� �׷���
+		}
+	};
 	
 	public void go() {
 		setTitle("Pokemon");
@@ -55,6 +66,10 @@ public class NickName extends JFrame{
         btn1.setBackground(java.awt.Color.RED);
 		btn1.setFont(font);
 		frame.add(btn1);
+
+		page1.setLayout(null);
+		page1.setBounds(0,0,1200,800);
+		frame.add(page1);
 
 		//버튼 1을 누르면 Battel 클래스로 넘어감 만약 입력하지 않았다면 경고창 띄움
 		btn1.addActionListener(new java.awt.event.ActionListener() {

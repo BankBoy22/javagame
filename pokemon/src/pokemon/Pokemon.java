@@ -2,7 +2,15 @@ package pokemon;
 
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.awt.Graphics;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +22,22 @@ public class Pokemon {
 	int HEIGHT=800;
 	JButton btn1 = new JButton("START");
 	JButton btn2 = new JButton("QUIT");
+	
+
+	public void playSound(String pathName, boolean isRoop) {
+		try {
+			File audioFile = new File(pathName);
+			AudioInputStream audiostream = AudioSystem.getAudioInputStream(audioFile);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audiostream);
+			clip.start();
+			if(isRoop) {
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	static JPanel page1=new JPanel(){
 		Image background=new ImageIcon(Main.class.getResource("./image/poke.png")).getImage();
@@ -23,6 +47,11 @@ public class Pokemon {
 		}
 	};
 	public Pokemon() {
+
+		
+
+		playSound("./sound/intro.mp3", true);
+
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);

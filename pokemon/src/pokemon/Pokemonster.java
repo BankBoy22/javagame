@@ -13,8 +13,10 @@ public class Pokemonster {
     private int hp;
     //포켓몬 레벨
     private int level;
-    //포켓몬 경험치
-    private int exp;
+    //포켓몬 스피드
+    private int speed;
+    //포켓몬 최대 체력
+    private int maxHp;
     //포켓몬 공격
     public void attack(Pokemonster enemy) {
         //공격력 - 상대방 방어력
@@ -31,6 +33,9 @@ public class Pokemonster {
         } else if (this.type == "풀" && enemy.type == "물") {
             System.out.println("효과가 굉장했다!");
             enemy.hp = enemy.hp - damage*2;
+        } else if (this.type == "전기" && enemy.type == "물") {
+            System.out.println("효과가 굉장했다!");
+            enemy.hp = enemy.hp - damage*2;
         }
         //불리한 타입의 기술을 쓰면 효과가 별로였다는 메세지 출력 그리고 데미지 1/2배
         else if (this.type == "불" && enemy.type == "물") {
@@ -42,6 +47,9 @@ public class Pokemonster {
         } else if (this.type == "풀" && enemy.type == "불") {
             System.out.println("효과가 별로인듯 하다....");
             enemy.hp = enemy.hp - damage / 2;
+        } else if (this.type == "물" && enemy.type == "전기") {
+            System.out.println("효과가 별로인듯 하다....");
+            enemy.hp = enemy.hp - damage*2;
         }
         //그외에는 일반데미지가 들어감
         else {
@@ -53,26 +61,21 @@ public class Pokemonster {
             enemy.hp = 0;
             //상대방이 쓰러졌다는 메세지 출력
             System.out.println(enemy.name + "가 쓰러졌다.");
-            //경험치 획득
-            this.exp = this.exp + 100;
-            //레벨업
-            this.levelUp();
         }
     }
 
     //포켓몬 회복
     public void recover() {
         //체력이 자신의 최대 체력이면 회복할 수 없다는 메세지 출력
-        if (this.hp == 100) {
+        if (this.hp == maxHp) {
             System.out.println("체력이 이미 최대치입니다.");
         }
         //체력이 100이 아니면
         else {
-            //체력이 100이 넘으면 100으로 설정
-            if (this.hp + 10 > 100) {
-                this.hp = 100;
+            if (this.hp + 10 > maxHp) {
+                this.hp = maxHp;
             }
-            //체력이 100이 넘지 않으면 10씩 회복
+            //체력이 maxhp를 넘지 않으면 10씩 회복
             else {
                 this.hp = this.hp + 10;
             }
@@ -81,28 +84,6 @@ public class Pokemonster {
         }
     }
 
-    //포켓몬 경험치 획득
-    public void gainExp(int exp) {
-        this.exp = this.exp + exp;
-    }
-
-    //포켓몬 레벨업
-    public void levelUp() {
-        //레벨업 조건
-        if (this.exp >= 100) {
-            //레벨업
-            this.level = this.level + 1;
-            //레벨업 후 경험치 초기화
-            this.exp = 0;
-            //레벨업 후 공격력 증가
-            this.attack = this.attack + 10;
-            //레벨업 후 방어력 증가
-            this.defense = this.defense +
-            10;
-            //레벨업 후 체력 증가
-            this.hp = this.hp + 10;
-        }
-    }
     //포켓몬 정보 출력
     public void printInfo() {
         System.out.println("이름: " + this.name);
@@ -111,17 +92,18 @@ public class Pokemonster {
         System.out.println("공격력: " + this.attack);
         System.out.println("방어력: " + this.defense);
         System.out.println("체력: " + this.hp);
-        System.out.println("경험치: " + this.exp);
+        System.out.println("경험치: " + this.speed);
     }
     //포켓몬 생성자
-    public Pokemonster(String name, String type, int attack, int defense, int hp, int level, int exp) {
+    public Pokemonster(String name, String type, int attack, int defense, int hp, int level, int speed) {
         this.name = name;
         this.type = type;
         this.attack = attack;
         this.defense = defense;
         this.hp = hp;
         this.level = level;
-        this.exp = exp;
+        this.speed = speed;
+        maxHp=hp;
     }
     //포켓몬 이름 getter
     public String getName() {
@@ -180,13 +162,17 @@ public class Pokemonster {
         this.level = level;
     }
 
-    //포켓몬 경험치 getter
-    public int getExp() {
-        return exp;
+    //포켓몬 스피드 getter
+    public int getSpeed() {
+        return speed;
     }
 
-    //포켓몬 경험치 setter
-    public void setExp(int exp) {
-        this.exp = exp;
+    //포켓몬 스피드 setter
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 }
