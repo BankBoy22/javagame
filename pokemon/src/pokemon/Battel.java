@@ -2,10 +2,17 @@ package pokemon;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,7 +36,10 @@ public class Battel {
     public Battel(String player_name, String enemy_name) {
         this.player_name = player_name;
         this.enemy_name = enemy_name;
-        JLabel select_label = new JLabel(player_name+"님 포켓몬을 선택하세요", JLabel.CENTER);
+        JLabel select_label = new JLabel(player_name+"님 포켓몬을 선택하세요!", JLabel.CENTER);
+        //선택 라벨 여백 흰색으로
+        select_label.setOpaque(true);
+        select_label.setBackground(Color.WHITE);
         //선택 라벨 폰트 변경
         select_label.setFont(font);
         frame.setSize(WIDTH,HEIGHT);
@@ -80,8 +90,13 @@ public class Battel {
         squirtle.setBounds(800, 400, 200, 200);
         frame.getContentPane().add(squirtle);
         //포켓몬을 선택하세요 텍스트 상단에 띄우기
-        select_label.setBounds(200, 50, 800, 50);
+        select_label.setBounds(200, 30, 800, 50);
         frame.getContentPane().add(select_label);
+        //배경 이미지 넣기
+        JLabel background_main = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/room.png")));
+        background_main.setBounds(0, 0, WIDTH, HEIGHT);
+        frame.getContentPane().add(background_main);
+
         //피카츄 선택 버튼 이벤트
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -91,9 +106,9 @@ public class Battel {
                 player_pokemon=0;
                 //포켓몬 선택 화면을 지우고
                 //난이도 선택
-                JLabel select_label2 = new JLabel("난이도를 선택하세요");
+                JLabel select_label2 = new JLabel("난이도를 선택하세요",JLabel.CENTER);
                 select_label2.setFont(font);
-                select_label2.setBounds(500, 0, 800, 50);
+                select_label2.setBounds(200, 0, 800, 50);
                 frame.getContentPane().add(select_label2);
                 //초급 난이도 버튼
                 JButton b_btn1 = new JButton("초급");
@@ -128,6 +143,11 @@ public class Battel {
                         frame.getContentPane().add(btn3);
                         frame.getContentPane().add(btn4);
                         frame.getContentPane().add(select_label);
+                        frame.getContentPane().add(pikachu);
+                        frame.getContentPane().add(bulbasaur);
+                        frame.getContentPane().add(squirtle);
+                        frame.getContentPane().add(fire);
+                        frame.getContentPane().add(background_main);
                     }
                 });
                 //초급 난이도 버튼을 선택하면 level = 1 로 설정하고 배틀 화면 메소드 실행
@@ -163,23 +183,27 @@ public class Battel {
                 //난이도 선택
                 //플레이어의 포켓몬은 파이리
                 player_pokemon=1;
-                JLabel select_label2 = new JLabel("난이도를 선택하세요",JLabel.CENTER);
-                select_label2.setBounds(500, 50, 200, 50);
+                JLabel select_label2 = new JLabel("난이도를 선택하세요", JLabel.CENTER);
+                select_label2.setFont(font);
+                select_label2.setBounds(200, 0, 800, 50);
                 frame.getContentPane().add(select_label2);
                 //초급 난이도 버튼
                 JButton b_btn1 = new JButton("초급");
-                b_btn1.setBounds(300,100,600,200);
+                b_btn1.setFont(font);
+                b_btn1.setBounds(300,100,600,100);
                 b_btn1.setBackground(java.awt.Color.YELLOW);
                 frame.getContentPane().add(b_btn1);
                 //중급 난이도 버튼
                 JButton b_btn2 = new JButton("중급");
-                b_btn2.setBounds(300,300,600,200);
-                b_btn2.setBackground(java.awt.Color.RED);
+                b_btn2.setFont(font);
+                b_btn2.setBounds(300,300,600,100);
+                b_btn2.setBackground(java.awt.Color.GREEN);
                 frame.getContentPane().add(b_btn2);
                 //고급 난이도 버튼
                 JButton b_btn3 = new JButton("고급");
-                b_btn3.setBounds(300,500,600,200);
-                b_btn3.setBackground(java.awt.Color.GREEN);
+                b_btn3.setFont(font);
+                b_btn3.setBounds(300,500,600,100);
+                b_btn3.setBackground(java.awt.Color.RED);
                 frame.getContentPane().add(b_btn3);
                 //뒤로가기 버튼 생성
                 JButton back_btn = new JButton("뒤로가기");
@@ -196,6 +220,11 @@ public class Battel {
                         frame.getContentPane().add(btn3);
                         frame.getContentPane().add(btn4);
                         frame.getContentPane().add(select_label);
+                        frame.getContentPane().add(pikachu);
+                        frame.getContentPane().add(bulbasaur);
+                        frame.getContentPane().add(squirtle);
+                        frame.getContentPane().add(fire);
+                        frame.getContentPane().add(background_main);
                     }
                 });
                 //초급 난이도 버튼을 선택하면 level = 1 로 설정하고 배틀 화면 메소드 실행
@@ -228,24 +257,27 @@ public class Battel {
                 //포켓몬 선택 화면을 지우고
                 //플레이어의 포켓몬은 이상해씨
                 player_pokemon=2;
-                //난이도 선택
-                JLabel select_label2 = new JLabel("난이도를 선택하세요");
-                select_label2.setBounds(500, 50, 200, 50);
+                JLabel select_label2 = new JLabel("난이도를 선택하세요", JLabel.CENTER);
+                select_label2.setFont(font);
+                select_label2.setBounds(200, 0, 800, 50);
                 frame.getContentPane().add(select_label2);
                 //초급 난이도 버튼
                 JButton b_btn1 = new JButton("초급");
-                b_btn1.setBounds(300,100,600,200);
+                b_btn1.setFont(font);
+                b_btn1.setBounds(300,100,600,100);
                 b_btn1.setBackground(java.awt.Color.YELLOW);
                 frame.getContentPane().add(b_btn1);
                 //중급 난이도 버튼
                 JButton b_btn2 = new JButton("중급");
-                b_btn2.setBounds(300,300,600,200);
-                b_btn2.setBackground(java.awt.Color.RED);
+                b_btn2.setFont(font);
+                b_btn2.setBounds(300,300,600,100);
+                b_btn2.setBackground(java.awt.Color.GREEN);
                 frame.getContentPane().add(b_btn2);
                 //고급 난이도 버튼
                 JButton b_btn3 = new JButton("고급");
-                b_btn3.setBounds(300,500,600,200);
-                b_btn3.setBackground(java.awt.Color.GREEN);
+                b_btn3.setFont(font);
+                b_btn3.setBounds(300,500,600,100);
+                b_btn3.setBackground(java.awt.Color.RED);
                 frame.getContentPane().add(b_btn3);
                 //뒤로가기 버튼 생성
                 JButton back_btn = new JButton("뒤로가기");
@@ -262,6 +294,11 @@ public class Battel {
                         frame.getContentPane().add(btn3);
                         frame.getContentPane().add(btn4);
                         frame.getContentPane().add(select_label);
+                        frame.getContentPane().add(pikachu);
+                        frame.getContentPane().add(bulbasaur);
+                        frame.getContentPane().add(squirtle);
+                        frame.getContentPane().add(fire);
+                        frame.getContentPane().add(background_main);
                     }
                 });
                 //초급 난이도 버튼을 선택하면 level = 1 로 설정하고 배틀 화면 메소드 실행
@@ -295,23 +332,27 @@ public class Battel {
                 //플레이어의 포켓몬은 꼬부기
                 player_pokemon=3;
                 //난이도 선택
-                JLabel select_label2 = new JLabel("난이도를 선택하세요");
-                select_label2.setBounds(500, 50, 200, 50);
+                JLabel select_label2 = new JLabel("난이도를 선택하세요", JLabel.CENTER);
+                select_label2.setFont(font);
+                select_label2.setBounds(200, 0, 800, 50);
                 frame.getContentPane().add(select_label2);
                 //초급 난이도 버튼
                 JButton b_btn1 = new JButton("초급");
-                b_btn1.setBounds(300,100,600,200);
+                b_btn1.setFont(font);
+                b_btn1.setBounds(300,100,600,100);
                 b_btn1.setBackground(java.awt.Color.YELLOW);
                 frame.getContentPane().add(b_btn1);
                 //중급 난이도 버튼
                 JButton b_btn2 = new JButton("중급");
-                b_btn2.setBounds(300,300,600,200);
-                b_btn2.setBackground(java.awt.Color.RED);
+                b_btn2.setFont(font);
+                b_btn2.setBounds(300,300,600,100);
+                b_btn2.setBackground(java.awt.Color.GREEN);
                 frame.getContentPane().add(b_btn2);
                 //고급 난이도 버튼
                 JButton b_btn3 = new JButton("고급");
-                b_btn3.setBounds(300,500,600,200);
-                b_btn3.setBackground(java.awt.Color.GREEN);
+                b_btn3.setFont(font);
+                b_btn3.setBounds(300,500,600,100);
+                b_btn3.setBackground(java.awt.Color.RED);
                 frame.getContentPane().add(b_btn3);
                 //뒤로가기 버튼 생성
                 JButton back_btn = new JButton("뒤로가기");
@@ -328,6 +369,11 @@ public class Battel {
                         frame.getContentPane().add(btn3);
                         frame.getContentPane().add(btn4);
                         frame.getContentPane().add(select_label);
+                        frame.getContentPane().add(pikachu);
+                        frame.getContentPane().add(bulbasaur);
+                        frame.getContentPane().add(squirtle);
+                        frame.getContentPane().add(fire);
+                        frame.getContentPane().add(background_main);
                     }
                 });
                 //초급 난이도 버튼을 선택하면 level = 1 로 설정하고 배틀 화면 메소드 실행
@@ -381,7 +427,7 @@ public class Battel {
             else if(pokemon == 1){
                 player1 = new Pokemonster("파이리", "불", 40, 5, 90, 5, 20);
                 player2 = new Pokemonster("이상해씨", "풀", 10, 10, 90, 3, 10);
-                JLabel myfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/FIRE_MAIN.png")));
+                JLabel myfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myfire.png")));
                 myfireLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myfireLabel);
                 JLabel enemyisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_isang.png")));
@@ -391,7 +437,7 @@ public class Battel {
             else if(pokemon == 2){
                 player1 = new Pokemonster("이상해씨", "풀", 20, 15, 110, 5, 15);
                 player2 = new Pokemonster("꼬부기", "물", 10, 5, 100, 3, 10);
-                JLabel myisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/FIRE_MAIN.png")));
+                JLabel myisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myisang.png")));
                 myisangLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myisangLabel);
                 JLabel enemygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_gobugi.png")));
@@ -401,7 +447,7 @@ public class Battel {
             else if(pokemon == 3){
                 player1 = new Pokemonster("꼬부기", "물", 35, 10, 120, 5, 12);
                 player2 = new Pokemonster("파이리", "불", 10, 5, 100, 3, 10);
-                JLabel mygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/FIRE_MAIN.png")));
+                JLabel mygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mygobugi.png")));
                 mygobugiLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(mygobugiLabel);
                 JLabel enemyfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_fire.png")));
@@ -552,6 +598,7 @@ public class Battel {
             JLabel background = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/battle1.jpg")));
             background.setBounds(0, 0, 1200, 800);
             frame.getContentPane().add(background);
+
             
         }
         else if(level == 2){

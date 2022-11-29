@@ -56,9 +56,23 @@ public class NickName extends JFrame{
 
 		JButton btn1 = new JButton("입력완료");
         btn1.setBounds(700,500,150,150);
-        btn1.setBackground(java.awt.Color.RED);
+        btn1.setBackground(java.awt.Color.YELLOW);
 		btn1.setFont(font);
 		frame.add(btn1);
+
+
+		//배경화면
+		ImageIcon icon = new ImageIcon(Main.class.getResource("./image/Mr.O.png"));
+		Image img = icon.getImage();
+		Image changeImg = img.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon = new ImageIcon(changeImg);
+		JLabel back = new JLabel(changeIcon);
+		back.setBounds(0,0,WIDTH,HEIGHT);
+		frame.add(back);
+
+
+
+
 
 
 		//버튼 1을 누르면 Battel 클래스로 넘어감 만약 입력하지 않았다면 경고창 띄움
