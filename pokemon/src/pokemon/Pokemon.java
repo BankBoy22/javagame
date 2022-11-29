@@ -3,14 +3,12 @@ package pokemon;
 
 import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
 import java.awt.Graphics;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,10 +21,29 @@ public class Pokemon {
 	JButton btn1 = new JButton("START");
 	JButton btn2 = new JButton("QUIT");
 	
-
-	public void playSound(String pathName, boolean isRoop) {
+	//mp3 음악 재생
+	public void playMusic(URL url) {
 		try {
-			File audioFile = new File(pathName);
+			File musicPath = new File(url.toURI());
+			if(musicPath.exists()) {
+				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioInput);
+				clip.start();
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+			}
+			else {
+				System.out.println("파일이 존재하지 않습니다.");
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void playSound(URL url, boolean isRoop) {
+		try {
+			File audioFile = new File(url.getFile());
 			AudioInputStream audiostream = AudioSystem.getAudioInputStream(audioFile);
 			Clip clip = AudioSystem.getClip();
 			clip.open(audiostream);
@@ -50,7 +67,8 @@ public class Pokemon {
 
 		
 
-		playSound("./sound/intro.mp3", true);
+		//프레임이 출력되는동안 음악 계속 나오게함
+		
 
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setResizable(false);
@@ -82,6 +100,8 @@ public class Pokemon {
 	
 	public void go() {
 		frame.setVisible(true);
+		//음악 재생
+		playMusic(getClass().getResource("./sound/intro.mp3"));
 	}
 	
 

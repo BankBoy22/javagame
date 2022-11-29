@@ -22,13 +22,6 @@ public class NickName extends JFrame{
 	JPanel frame = new JPanel();
 	Font font = new Font("HY견명조",Font.BOLD,30);
 
-	static JPanel page1=new JPanel(){
-		Image background=new ImageIcon(Main.class.getResource("./image/nickname.png")).getImage();
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(background, 0, 0, null); //image�� �׷���
-		}
-	};
 	
 	public void go() {
 		setTitle("Pokemon");
@@ -67,9 +60,6 @@ public class NickName extends JFrame{
 		btn1.setFont(font);
 		frame.add(btn1);
 
-		page1.setLayout(null);
-		page1.setBounds(0,0,1200,800);
-		frame.add(page1);
 
 		//버튼 1을 누르면 Battel 클래스로 넘어감 만약 입력하지 않았다면 경고창 띄움
 		btn1.addActionListener(new java.awt.event.ActionListener() {
