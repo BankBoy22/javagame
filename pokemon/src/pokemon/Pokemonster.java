@@ -1,5 +1,7 @@
 package pokemon;
 
+import javax.swing.JOptionPane;
+
 public class Pokemonster {
     //포켓몬 이름
     private String name;
@@ -31,30 +33,30 @@ public class Pokemonster {
         //유리한 타입의 기술을 쓰면 효과가 굉장했다는 메세지 출력 그리고 데미지 2배
         if (this.type == "불" && enemy.type == "풀") {
             System.out.println("효과가 굉장했다!");
-            enemy.hp = enemy.hp - damage*2;
+            enemy.hp = enemy.hp - (damage*2);
         } else if (this.type == "물" && enemy.type == "불") {
             System.out.println("효과가 굉장했다!");
-            enemy.hp = enemy.hp - damage*2;
+            enemy.hp = enemy.hp - (damage*2);
         } else if (this.type == "풀" && enemy.type == "물") {
             System.out.println("효과가 굉장했다!");
-            enemy.hp = enemy.hp - damage*2;
+            enemy.hp = enemy.hp - (damage*2);
         } else if (this.type == "전기" && enemy.type == "물") {
             System.out.println("효과가 굉장했다!");
-            enemy.hp = enemy.hp - damage*2;
+            enemy.hp = enemy.hp - (damage*2);
         }
         //불리한 타입의 기술을 쓰면 효과가 별로였다는 메세지 출력 그리고 데미지 1/2배
         else if (this.type == "불" && enemy.type == "물") {
             System.out.println("효과가 별로인듯 하다....!");
-            enemy.hp = enemy.hp - damage / 2;
+            enemy.hp = enemy.hp - (damage / 2);
         } else if (this.type == "물" && enemy.type == "풀") {
             System.out.println("효과가 별로인듯 하다....");
-            enemy.hp = enemy.hp - damage / 2;
+            enemy.hp = enemy.hp - (damage / 2);
         } else if (this.type == "풀" && enemy.type == "불") {
             System.out.println("효과가 별로인듯 하다....");
-            enemy.hp = enemy.hp - damage / 2;
+            enemy.hp = enemy.hp - (damage / 2);
         } else if (this.type == "물" && enemy.type == "전기") {
             System.out.println("효과가 별로인듯 하다....");
-            enemy.hp = enemy.hp - damage*2;
+            enemy.hp = enemy.hp - (damage / 2);
         }
         //그외에는 일반데미지가 들어감
         else {
@@ -69,6 +71,35 @@ public class Pokemonster {
         }
     }
 
+    //울음소리 공격은 상대의 어택을 3줄인다
+    public void attack2(Pokemonster enemy) {
+        System.out.println(this.name + "는 울음소리를 사용했다.");
+        if (enemy.attack <= 10) {
+            enemy.attack = 10; //10까지 떨어지면 더이상 안떨어짐
+            System.out.println(enemy.name + "의 공격력은 더이상 떨어지지 않는다.");
+            JOptionPane.showMessageDialog(null, enemy.name + "의 공격력은 더이상 떨어지지 않는다.");
+        }
+        else{
+            enemy.attack = enemy.attack - 3;
+            System.out.println(enemy.name + "의 공격력이 3 줄었다.");
+        }
+    }
+
+    //째려보기는 상대의 방어력을 3줄인다
+    public void attack3(Pokemonster enemy) {
+        System.out.println(this.name + "는 째려보기를 사용했다.");
+        if (enemy.defense <= 10) {
+            enemy.defense = 10; //10까지 떨어지면 더이상 안떨어짐
+            System.out.println(enemy.name + "의 방어력은 더이상 떨어지지 않는다.");
+            //더이상 떨어지지 않는다는 메세지창 띄우기
+            JOptionPane.showMessageDialog(null, enemy.name + "의 방어력은 더이상 떨어지지 않는다.");
+        }
+        else{
+            enemy.defense = enemy.defense - 3;
+            System.out.println(enemy.name + "의 방어력이 3 줄었다.");
+        }
+    }
+
     //포켓몬 회복
     public void recover() {
         //체력이 자신의 최대 체력이면 회복할 수 없다는 메세지 출력
@@ -77,12 +108,12 @@ public class Pokemonster {
         }
         //체력이 100이 아니면
         else {
-            if (this.hp + 5 > maxHp) {
+            if (this.hp + 10 > maxHp) {
                 this.hp = maxHp;
             }
             //체력이 maxhp를 넘지 않으면 10씩 회복
             else {
-                this.hp = this.hp + 5;
+                this.hp = this.hp + 10;
             }
             //체력 회복 메세지 출력
             System.out.println(this.name + "의 체력이 회복되었습니다.");
@@ -114,71 +145,20 @@ public class Pokemonster {
         maxHp=hp;
     }
 
-    // public Pokemonster(String name) {
-    //     if (name == "이상해씨") {
-    //         this("이상해씨", "풀", 10, 10, 100, 1, 10);
-    //     }
-    //     else if(name == "파이리"){
-    //         this("파이리", "불", 10, 10, 100, 1, 10);
-    //     }
-    //     else if(name == "피카츄"){
-    //         this("피카츄", "전기", 10, 10, 100, 1, 10);
-    //     }
-    //     else if(name == "꼬부기"){
-    //         this("꼬부기", "물", 10, 10, 100, 1, 10);
-    //     }
-    // }
 
     public void makepokemon(String name){
         if (name == "이상해씨") {
-                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
-                }
-                else if(name == "이상해씨쉬움"){
-                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
-                }
-                else if(name == "이상해씨보통"){
-                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
-                }
-                else if(name == "이상해씨어려움"){
-                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
+                    Pokemonster1("이상해씨", "풀", 15, 20, 110, 5, 15);
                 }
                 else if(name == "꼬부기"){
-                    Pokemonster1("꼬부기", "물", 30, 20, 100, 5, 15);
-                }
-                else if(name == "꼬부기쉬움"){
-                    Pokemonster1("꼬부기", "물", 10, 10, 100, 1, 10);
-                }
-                else if(name == "꼬부기보통"){
-                    Pokemonster1("꼬부기", "불", 10, 10, 100, 1, 10);
-                }
-                else if(name == "꼬부기어려움"){
-                    Pokemonster1("꼬부기", "물", 10, 10, 100, 1, 10);
+                    Pokemonster1("꼬부기", "물", 25, 15, 120, 5, 17);
                 }
                 else if(name == "파이리"){
-                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
-                }
-                else if(name == "파이리쉬움"){
-                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
-                }
-                else if(name == "파이리보통"){
-                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
-                }
-                else if(name == "파이리어려움"){
-                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
+                    Pokemonster1("파이리", "불", 30, 10, 80, 5, 20);
                 }
                 else if(name == "피카츄"){
-                    Pokemonster1("피카츄", "전기", 20, 10, 100, 5, 30);
+                    Pokemonster1("피카츄", "전기", 20, 15, 100, 5, 30);
                 }
-                else if(name == "파키츄쉬움"){
-                    Pokemonster1("피카츄", "전기", 15, 5, 100, 3, 10);
-                }
-                else if(name == "피카츄보통"){
-                    Pokemonster1("피카츄", "전기", 15, 5, 100, 3, 10);
-                }
-                else if(name == "피카츄어려움"){
-                    Pokemonster1("피카츄", "전기", 15, 5, 100, 3, 10);
-                }
-
     }
 
     //포켓몬 이름 getter

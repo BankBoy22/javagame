@@ -416,7 +416,7 @@ public class Battel {
             //pokemon의 값에 따라 포켓몬 객체 생성
             if(pokemon == 0){
                 player1.makepokemon("피카츄");
-                player2.makepokemon("꼬부기쉬움");
+                player2.makepokemon("꼬부기");
                 //포켓몬 이름과 체력 옆에 이미지 출력
                 JLabel mypikachuLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mypika.png")));
                 mypikachuLabel.setBounds(170, 280, 200, 200);
@@ -427,7 +427,7 @@ public class Battel {
             }
             else if(pokemon == 1){
                 player1.makepokemon("파이리");
-                player2.makepokemon("이상해씨쉬움");
+                player2.makepokemon("이상해씨");
                 JLabel myfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myfire.png")));
                 myfireLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myfireLabel);
@@ -437,7 +437,7 @@ public class Battel {
             }
             else if(pokemon == 2){
                 player1.makepokemon("이상해씨");
-                player2.makepokemon("꼬부기쉬움");
+                player2.makepokemon("꼬부기");
                 JLabel myisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myisang.png")));
                 myisangLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myisangLabel);
@@ -447,7 +447,7 @@ public class Battel {
             }
             else if(pokemon == 3){
                 player1.makepokemon("꼬부기");
-                player2.makepokemon("파이리쉬움");
+                player2.makepokemon("파이리");
                 JLabel mygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mygoubugi.png")));
                 mygobugiLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(mygobugiLabel);
@@ -491,7 +491,7 @@ public class Battel {
             name_label2.setBounds(100, 50, 100, 50);
             frame.getContentPane().add(name_label2);
             //공격버튼 생성
-            JButton attack_btn = new JButton("공격");
+            JButton attack_btn = new JButton("싸운다");
             attack_btn.setFont(font2);
             attack_btn.setBounds(200, 500, 400, 90);
             frame.getContentPane().add(attack_btn);
@@ -570,15 +570,54 @@ public class Battel {
                 }
             });
             //도망버튼 생성
-            JButton run_btn = new JButton("도망");
+            JButton run_btn = new JButton("도망친다");
             run_btn.setFont(font2);
-            run_btn.setBounds(200, 590, 800, 90);
+            run_btn.setBounds(600, 590, 400, 90);
             frame.getContentPane().add(run_btn);
             //도망버튼을 누르면 도망을 실행함
             run_btn.addActionListener(new ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent e) {
                     //도망 칠수 없었다는 메시지 출력
                     JOptionPane.showMessageDialog(null, "도망칠 수 없습니다.");
+                }
+            });
+            //특수공격버튼 생성
+            JButton special_btn = new JButton("특수공격");
+            special_btn.setFont(font2);
+            special_btn.setBounds(200, 590, 400, 90);
+            frame.getContentPane().add(special_btn);
+            //특수공격버튼을 누르면 특수공격을 실행함
+            special_btn.addActionListener(new ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    //특수공격을 실행하면 플레이어는 특수공격을 하고 상대는 공격을 함
+                    //피카츄랑 파이리는 울음소리 특수공격을 사용함
+                    if(pokemon == 0 || pokemon == 1){
+                        player1.attack2(player2);
+                    }
+                    else if(pokemon == 2 || pokemon == 3){
+                        player1.attack3(player2);
+                    }
+                    //플레이어는 특수공격을 하고 나면 체력바를 갱신함
+                    hp_label2.setText("HP : " + player2.getHp()+" / "+player2.getMaxHp());
+                    enemy_hp_bar.setValue(player2.getHp());
+                    //상대는 공격을 하고 나면 체력바를 갱신함
+                    player2.attack(player1);
+                    hp_label.setText("HP : " + player1.getHp()+" / "+player1.getMaxHp());
+                    hp_bar.setValue(player1.getHp());
+                    //만약 내 포켓몬의 체력이 0이하가 되면 패배하였습니다! 라는 메시지를 출력하고 메인 화면으로 돌아감
+                    if(player1.getHp() <= 0){
+                        JOptionPane.showMessageDialog(null, "패배하였습니다!");
+                        setVisible(false);
+                        Pokemon pokemon = new Pokemon();
+                        pokemon.go();
+                    }
+                    //만약 상대 포켓몬의 체력이 0이하가 되면 승리하였습니다! 라는 메시지를 출력하고 메인 화면으로 돌아감
+                    else if(player2.getHp() <= 0){
+                        JOptionPane.showMessageDialog(null, "승리하였습니다!");
+                        setVisible(false);
+                        Pokemon pokemon = new Pokemon();
+                        pokemon.go();
+                    }
                 }
             });
             //배경화면 생성
