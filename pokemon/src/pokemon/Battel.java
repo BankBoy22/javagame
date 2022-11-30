@@ -28,8 +28,8 @@ public class Battel {
     int WIDTH=1200;
     int HEIGHT=800;
     int level=0;
-    Pokemonster player1=new Pokemonster(null, null, HEIGHT, HEIGHT, WIDTH, level, HEIGHT);
-    Pokemonster player2=new Pokemonster(null, null, HEIGHT, HEIGHT, WIDTH, level, HEIGHT);
+    Pokemonster player1;
+    Pokemonster player2;
     int player_pokemon=0;
     String player_name = "플레이어";
     String enemy_name = "라이벌";
@@ -329,9 +329,8 @@ public class Battel {
                 frame.getContentPane().removeAll();
                 frame.repaint();
                 //포켓몬 선택 화면을 지우고
-                //플레이어의 포켓몬은 꼬부기
+                //플레이어의 포켓몬은 이상해씨
                 player_pokemon=3;
-                //난이도 선택
                 JLabel select_label2 = new JLabel("난이도를 선택하세요", JLabel.CENTER);
                 select_label2.setFont(font);
                 select_label2.setBounds(200, 0, 800, 50);
@@ -380,21 +379,21 @@ public class Battel {
                 b_btn1.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         level = 1;
-                        battle(level,player_pokemon);
+                        battle(level, player_pokemon);
                     }
                 });
                 //중급 난이도 버튼을 선택하면 level = 2 로 설정하고 배틀 화면 메소드 실행
                 b_btn2.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         level = 2;
-                        battle(level,player_pokemon);
+                        battle(level, player_pokemon);
                     }
                 });
                 //고급 난이도 버튼을 선택하면 level = 3 로 설정하고 배틀 화면 메소드 실행
                 b_btn3.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         level = 3;
-                        battle(level,player_pokemon);
+                        battle(level, player_pokemon);
                     }
                 });
         }});
@@ -412,10 +411,12 @@ public class Battel {
         frame.getContentPane().setLayout(null);
         //만약 level = 1 이면 초급 난이도
         if(level == 1){
+            player1 = new Pokemonster();
+            player2 = new Pokemonster();
             //pokemon의 값에 따라 포켓몬 객체 생성
             if(pokemon == 0){
-                player1 = new Pokemonster("피카츄", "전기", 30, 10, 100, 5, 30);
-                player2 = new Pokemonster("꼬부기", "물", 10, 10, 100, 3, 10);
+                player1.makepokemon("피카츄");
+                player2.makepokemon("꼬부기쉬움");
                 //포켓몬 이름과 체력 옆에 이미지 출력
                 JLabel mypikachuLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mypika.png")));
                 mypikachuLabel.setBounds(170, 280, 200, 200);
@@ -425,8 +426,8 @@ public class Battel {
                 frame.getContentPane().add(enemygobugiLabel);
             }
             else if(pokemon == 1){
-                player1 = new Pokemonster("파이리", "불", 40, 5, 90, 5, 20);
-                player2 = new Pokemonster("이상해씨", "풀", 10, 10, 90, 3, 10);
+                player1.makepokemon("파이리");
+                player2.makepokemon("이상해씨쉬움");
                 JLabel myfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myfire.png")));
                 myfireLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myfireLabel);
@@ -435,8 +436,8 @@ public class Battel {
                 frame.getContentPane().add(enemyisangLabel);
             }
             else if(pokemon == 2){
-                player1 = new Pokemonster("이상해씨", "풀", 20, 15, 110, 5, 15);
-                player2 = new Pokemonster("꼬부기", "물", 10, 5, 100, 3, 10);
+                player1.makepokemon("이상해씨");
+                player2.makepokemon("꼬부기쉬움");
                 JLabel myisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myisang.png")));
                 myisangLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myisangLabel);
@@ -445,9 +446,9 @@ public class Battel {
                 frame.getContentPane().add(enemygobugiLabel);
             }
             else if(pokemon == 3){
-                player1 = new Pokemonster("꼬부기", "물", 35, 10, 120, 5, 12);
-                player2 = new Pokemonster("파이리", "불", 10, 5, 100, 3, 10);
-                JLabel mygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mygobugi.png")));
+                player1.makepokemon("꼬부기");
+                player2.makepokemon("파이리쉬움");
+                JLabel mygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mygoubugi.png")));
                 mygobugiLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(mygobugiLabel);
                 JLabel enemyfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_fire.png")));
@@ -500,28 +501,14 @@ public class Battel {
                     //공격을 실행하고 나면 스피드가 빠른 포켓몬이 먼저 공격함
                     if(player1.getSpeed() > player2.getSpeed()){
                         player1.attack(player2);
-                        //포켓몬이 먼저 공격했다 라는 상태를 알려주는 라벨 생성
-                        JLabel first_attack_label = new JLabel(player1.getName()+"이 먼저 공격했다!");
-                        first_attack_label.setFont(font3);
-                        first_attack_label.setBounds(500, 300, 300, 50);
-                        frame.getContentPane().add(first_attack_label);
                         //공격을 실행하고 나면 라이벌 포켓몬의 체력바가 갱신됨
                         hp_label2.setText("HP : " + player2.getHp()+" / "+player2.getMaxHp());
                         enemy_hp_bar.setValue(player2.getHp());
                         //4초뒤에 상대 공격 시작
-                        Timer timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                player2.attack(player1);
-                                //공격을 실행하고 나면 포켓몬의 체력바가 갱신됨
-                                first_attack_label.setText(player2.getName()+"이 공격했다!");
-                                hp_label.setText("HP : " + player1.getHp()+" / "+player1.getMaxHp());
-                                hp_bar.setValue(player1.getHp());
-                                
-                            }
-                        }, 4000);
-                        frame.getContentPane().remove(first_attack_label);
+                        player2.attack(player1);
+                        //공격을 실행하고 나면 포켓몬의 체력바가 갱신됨
+                        hp_label.setText("HP : " + player1.getHp()+" / "+player1.getMaxHp());
+                        hp_bar.setValue(player1.getHp());
                         if(player2.getHp() <= 0){
                             JOptionPane.showMessageDialog(null, "승리하였습니다!");
                             setVisible(false);
@@ -535,7 +522,7 @@ public class Battel {
                             Pokemon pokemon = new Pokemon();
                             pokemon.go();
                     }
-                    else{
+                    }else{
                         player2.attack(player1);
                         player1.attack(player2);
                         hp_label.setText("HP : " + player1.getHp()+" / "+player1.getMaxHp());
@@ -553,7 +540,7 @@ public class Battel {
                         pokemon.go();
                         }
                     }
-        }}});
+        }});
             //회복버튼 생성
             JButton heal_btn = new JButton("회복");
             heal_btn.setFont(font2);

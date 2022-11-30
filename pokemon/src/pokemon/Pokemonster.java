@@ -21,6 +21,11 @@ public class Pokemonster {
     public void attack(Pokemonster enemy) {
         //공격력 - 상대방 방어력
         int damage = this.attack - enemy.defense;
+        //만약 방어력이 공격력보다 높다면
+        if(damage <= 5) {
+            //데미지는 1
+            damage = 5;
+        }
         //공격 메세지 출력
         System.out.println(this.name + "가 " + enemy.name + "를 공격했다.");
         //유리한 타입의 기술을 쓰면 효과가 굉장했다는 메세지 출력 그리고 데미지 2배
@@ -72,12 +77,12 @@ public class Pokemonster {
         }
         //체력이 100이 아니면
         else {
-            if (this.hp + 10 > maxHp) {
+            if (this.hp + 5 > maxHp) {
                 this.hp = maxHp;
             }
             //체력이 maxhp를 넘지 않으면 10씩 회복
             else {
-                this.hp = this.hp + 10;
+                this.hp = this.hp + 5;
             }
             //체력 회복 메세지 출력
             System.out.println(this.name + "의 체력이 회복되었습니다.");
@@ -94,8 +99,11 @@ public class Pokemonster {
         System.out.println("체력: " + this.hp);
         System.out.println("경험치: " + this.speed);
     }
+
+ 
+
     //포켓몬 생성자
-    public Pokemonster(String name, String type, int attack, int defense, int hp, int level, int speed) {
+    public void Pokemonster1(String name, String type, int attack, int defense, int hp, int level, int speed) {
         this.name = name;
         this.type = type;
         this.attack = attack;
@@ -105,6 +113,74 @@ public class Pokemonster {
         this.speed = speed;
         maxHp=hp;
     }
+
+    // public Pokemonster(String name) {
+    //     if (name == "이상해씨") {
+    //         this("이상해씨", "풀", 10, 10, 100, 1, 10);
+    //     }
+    //     else if(name == "파이리"){
+    //         this("파이리", "불", 10, 10, 100, 1, 10);
+    //     }
+    //     else if(name == "피카츄"){
+    //         this("피카츄", "전기", 10, 10, 100, 1, 10);
+    //     }
+    //     else if(name == "꼬부기"){
+    //         this("꼬부기", "물", 10, 10, 100, 1, 10);
+    //     }
+    // }
+
+    public void makepokemon(String name){
+        if (name == "이상해씨") {
+                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
+                }
+                else if(name == "이상해씨쉬움"){
+                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
+                }
+                else if(name == "이상해씨보통"){
+                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
+                }
+                else if(name == "이상해씨어려움"){
+                    Pokemonster1("이상해씨", "풀", 30, 20, 100, 5, 20);
+                }
+                else if(name == "꼬부기"){
+                    Pokemonster1("꼬부기", "물", 30, 20, 100, 5, 15);
+                }
+                else if(name == "꼬부기쉬움"){
+                    Pokemonster1("꼬부기", "물", 10, 10, 100, 1, 10);
+                }
+                else if(name == "꼬부기보통"){
+                    Pokemonster1("꼬부기", "불", 10, 10, 100, 1, 10);
+                }
+                else if(name == "꼬부기어려움"){
+                    Pokemonster1("꼬부기", "물", 10, 10, 100, 1, 10);
+                }
+                else if(name == "파이리"){
+                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
+                }
+                else if(name == "파이리쉬움"){
+                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
+                }
+                else if(name == "파이리보통"){
+                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
+                }
+                else if(name == "파이리어려움"){
+                    Pokemonster1("파이리", "불", 10, 10, 100, 1, 10);
+                }
+                else if(name == "피카츄"){
+                    Pokemonster1("피카츄", "전기", 20, 10, 100, 5, 30);
+                }
+                else if(name == "파키츄쉬움"){
+                    Pokemonster1("피카츄", "전기", 15, 5, 100, 3, 10);
+                }
+                else if(name == "피카츄보통"){
+                    Pokemonster1("피카츄", "전기", 15, 5, 100, 3, 10);
+                }
+                else if(name == "피카츄어려움"){
+                    Pokemonster1("피카츄", "전기", 15, 5, 100, 3, 10);
+                }
+
+    }
+
     //포켓몬 이름 getter
     public String getName() {
         return name;
