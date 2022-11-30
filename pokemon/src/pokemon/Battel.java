@@ -3,6 +3,7 @@ package pokemon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +21,24 @@ import javax.swing.JProgressBar;
 
 
 public class Battel {
+    public void playMusic(URL url) {
+		try {
+			File musicPath = new File(url.toURI());
+			if(musicPath.exists()) {
+				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioInput);
+				clip.start();
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+			}
+			else {
+				System.out.println("파일이 존재하지 않습니다.");
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
     JFrame frame = new JFrame("Pokemon");
     //글자 크기 조절하면서 글자 가운데 맞춤
     java.awt.Font font = new java.awt.Font("맑은 고딕", java.awt.Font.BOLD, 30);
@@ -37,6 +56,9 @@ public class Battel {
         this.player_name = player_name;
         this.enemy_name = enemy_name;
         JLabel select_label = new JLabel(player_name+"님 포켓몬을 선택하세요!", JLabel.CENTER);
+        //선택창 화면 음악재생
+        URL url = getClass().getClassLoader().getResource("pokemon/sound/select.wav");
+        playMusic(url);
         //선택 라벨 여백 흰색으로
         select_label.setOpaque(true);
         select_label.setBackground(Color.WHITE);
@@ -411,6 +433,8 @@ public class Battel {
         frame.getContentPane().setLayout(null);
         //만약 level = 1 이면 초급 난이도
         if(level == 1){
+            //배틀음악 재생
+            playMusic(getClass().getClassLoader().getResource("pokemon/sound/battle1.wav"));
             player1 = new Pokemonster();
             player2 = new Pokemonster();
             //pokemon의 값에 따라 포켓몬 객체 생성

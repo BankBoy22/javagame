@@ -41,20 +41,7 @@ public class Pokemon {
 		}
 	}
 
-	public void playSound(URL url, boolean isRoop) {
-		try {
-			File audioFile = new File(url.getFile());
-			AudioInputStream audiostream = AudioSystem.getAudioInputStream(audioFile);
-			Clip clip = AudioSystem.getClip();
-			clip.open(audiostream);
-			clip.start();
-			if(isRoop) {
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	static JPanel page1=new JPanel(){
 		Image background=new ImageIcon(Main.class.getResource("./image/poke.png")).getImage();
@@ -100,8 +87,8 @@ public class Pokemon {
 	
 	public void go() {
 		frame.setVisible(true);
-		//음악 재생
-		playMusic(getClass().getResource("./sound/intro.mp3"));
+		//음악 실행
+		playMusic(getClass().getResource("./sound/intro.wav"));
 	}
 	
 
