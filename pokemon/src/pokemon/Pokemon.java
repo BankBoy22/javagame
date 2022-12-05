@@ -1,6 +1,6 @@
 package pokemon;
 
-
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.net.URL;
@@ -18,10 +18,12 @@ public class Pokemon {
 	JFrame frame = new JFrame("Pokemon"); 
 	int WIDTH=1200;
 	int HEIGHT=800;
+	Font font = new Font("HY견명조",Font.BOLD,20);
 	JButton btn1 = new JButton("START");
 	JButton btn2 = new JButton("QUIT");
 	
-	//mp3 음악 재생
+
+
 	public void playMusic(URL url) {
 		try {
 			File musicPath = new File(url.toURI());
@@ -43,6 +45,7 @@ public class Pokemon {
 
 
 
+
 	static JPanel page1=new JPanel(){
 		Image background=new ImageIcon(Main.class.getResource("./image/poke.png")).getImage();
 		public void paintComponent(Graphics g) {
@@ -56,13 +59,20 @@ public class Pokemon {
 
 		//프레임이 출력되는동안 음악 계속 나오게함
 		
-
+		playMusic(getClass().getResource("./sound/intro.wav"));
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//버튼의 폰트 변경
+		btn1.setFont(font);
+		btn2.setFont(font);
+		//버튼의 위치와 크기
 		btn1.setBounds(800,500,200,50);
 		btn2.setBounds(800,600,200,50);
+		//버튼의 배경색 변경 버튼1은 그린 버튼2는 레드
+		btn1.setBackground(new java.awt.Color(0, 255, 100));
+		btn2.setBackground(new java.awt.Color(255, 100, 0));
 		frame.getContentPane().setLayout(null);
 		page1.setLayout(null);
 		page1.setBounds(0,0,1200,800);
@@ -75,6 +85,7 @@ public class Pokemon {
 				NickName nick = new NickName();
 				nick.go();
 				frame.setVisible(false);
+			
 			}
 		});
 		//버튼 2를 누르면 프로그램이 종료됨
@@ -87,8 +98,7 @@ public class Pokemon {
 	
 	public void go() {
 		frame.setVisible(true);
-		//음악 실행
-		playMusic(getClass().getResource("./sound/intro.wav"));
+
 	}
 	
 

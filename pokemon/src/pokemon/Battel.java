@@ -445,7 +445,7 @@ public class Battel {
                 JLabel mypikachuLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mypika.png")));
                 mypikachuLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(mypikachuLabel);
-                JLabel enemygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_gobugi.png")));
+                JLabel enemygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/꼬부기.gif")));
                 enemygobugiLabel.setBounds(800, 70, 200, 200);
                 frame.getContentPane().add(enemygobugiLabel);
             }
@@ -455,7 +455,7 @@ public class Battel {
                 JLabel myfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myfire.png")));
                 myfireLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myfireLabel);
-                JLabel enemyisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_isang.png")));
+                JLabel enemyisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/이상해씨.gif")));
                 enemyisangLabel.setBounds(800, 70, 200, 200);
                 frame.getContentPane().add(enemyisangLabel);
             }
@@ -465,7 +465,7 @@ public class Battel {
                 JLabel myisangLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/myisang.png")));
                 myisangLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(myisangLabel);
-                JLabel enemygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_gobugi.png")));
+                JLabel enemygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/꼬부기.gif")));
                 enemygobugiLabel.setBounds(800, 70, 200, 200);
                 frame.getContentPane().add(enemygobugiLabel);
             }
@@ -475,7 +475,7 @@ public class Battel {
                 JLabel mygobugiLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/mygoubugi.png")));
                 mygobugiLabel.setBounds(170, 280, 200, 200);
                 frame.getContentPane().add(mygobugiLabel);
-                JLabel enemyfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/enemy_fire.png")));
+                JLabel enemyfireLabel = new JLabel(new javax.swing.ImageIcon(Main.class.getResource("./image/파이리.gif")));
                 enemyfireLabel.setBounds(800, 70, 200, 200);
                 frame.getContentPane().add(enemyfireLabel);
             }
