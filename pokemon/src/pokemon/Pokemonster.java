@@ -159,6 +159,9 @@ public class Pokemonster {
                 else if(name == "피카츄"){
                     Pokemonster1("피카츄", "전기", 20, 15, 100, 5, 30);
                 }
+                else if(name == "뮤츠"){
+                    Pokemonster1("뮤츠", "에스퍼", 50, 30, 150, 70, 80);
+                }
     }
 
     //포켓몬 이름 getter

@@ -2,13 +2,7 @@ package pokemon;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.io.File;
-import java.net.URL;
 import java.awt.Graphics;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,45 +15,19 @@ public class Pokemon {
 	Font font = new Font("HY견명조",Font.BOLD,20);
 	JButton btn1 = new JButton("START");
 	JButton btn2 = new JButton("QUIT");
+	BgmTest bgm = new BgmTest(Pokemon.class.getResource("./sound/intro.wav").getPath(), true);
+	BgmTest button = new BgmTest(Pokemon.class.getResource("./sound/button.wav").getPath(), false);
 	
-
-
-	public void playMusic(URL url) {
-		try {
-			File musicPath = new File(url.toURI());
-			if(musicPath.exists()) {
-				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-				Clip clip = AudioSystem.getClip();
-				clip.open(audioInput);
-				clip.start();
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
-			else {
-				System.out.println("파일이 존재하지 않습니다.");
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
-
-
 	static JPanel page1=new JPanel(){
-		Image background=new ImageIcon(Main.class.getResource("./image/poke.png")).getImage();
+		Image background=new ImageIcon(Pokemon.class.getResource("./image/poke.png")).getImage();
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(background, 0, 0, null); //image�� �׷���
 		}
 	};
-	public Pokemon() {
-
-		
-
+	public Pokemon(){
 		//프레임이 출력되는동안 음악 계속 나오게함
-		
-		playMusic(getClass().getResource("./sound/intro.wav"));
+		bgm.start();
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
@@ -82,6 +50,8 @@ public class Pokemon {
 		//버튼 1을 누르면 플레이어 이름과 라이벌 이름을 입력받는 NickName 클래스로 넘어감
 		btn1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				bgm.stop();
+				button.start();
 				NickName nick = new NickName();
 				nick.go();
 				frame.setVisible(false);
@@ -91,6 +61,7 @@ public class Pokemon {
 		//버튼 2를 누르면 프로그램이 종료됨
 		btn2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				button.start();
 				System.exit(0);
 			}
 		});

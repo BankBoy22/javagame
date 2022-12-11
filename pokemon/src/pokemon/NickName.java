@@ -2,13 +2,6 @@ package pokemon;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.io.File;
-import java.net.URL;
-import java.awt.Graphics;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,34 +16,14 @@ public class NickName extends JFrame{
 	int HEIGHT=800;
 	String player;
 	String rival;
-	
 	JPanel frame = new JPanel();
 	Font font = new Font("HY견명조",Font.BOLD,30);
-
-	public void playMusic(URL url) {
-		try {
-			File musicPath = new File(url.toURI());
-			if(musicPath.exists()) {
-				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-				Clip clip = AudioSystem.getClip();
-				clip.open(audioInput);
-				clip.start();
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
-			else {
-				System.out.println("파일이 존재하지 않습니다.");
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	
+	BgmTest bgm = new BgmTest(Pokemon.class.getResource("./sound/select.wav").getPath(), true);
+	BgmTest button = new BgmTest(Pokemon.class.getResource("./sound/button.wav").getPath(), false);
 	public void go() {
 		setTitle("Pokemon");
 		setSize(WIDTH,HEIGHT);
-		
+		bgm.start();
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JLabel l1 = new JLabel("플레이어 : ", JLabel.CENTER);
@@ -86,7 +59,7 @@ public class NickName extends JFrame{
 
 
 		//배경화면
-		ImageIcon icon = new ImageIcon(Main.class.getResource("./image/Mr.O.png"));
+		ImageIcon icon = new ImageIcon(Pokemon.class.getResource("./image/Mr.O.png"));
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon = new ImageIcon(changeImg);
@@ -94,16 +67,10 @@ public class NickName extends JFrame{
 		back.setBounds(0,0,WIDTH,HEIGHT);
 		frame.add(back);
 
-		//배경음악
-		playMusic(getClass().getResource("./sound/select.wav"));
-
-
-
-
-
 		//버튼 1을 누르면 Battel 클래스로 넘어감 만약 입력하지 않았다면 경고창 띄움
 		btn1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				button.start();
 				if(tf1.getText().equals("") || tf2.getText().equals("")) {
 					// 만약 플레이어 이름을 입력받지 못했다면 이름을 입력해주세요 라는 경고창을 띄우고 라이벌 이름을 입력받지 못했다면 라이벌 이름을 입력해주세요 라는 경고창을 띄움 둘다 입력하지 않았다면 입력해주세요 경고창을 띄움
 					if(tf1.getText().equals("") && tf2.getText().equals("")) {
@@ -117,6 +84,7 @@ public class NickName extends JFrame{
 				else {
 					player = tf1.getText();
 					rival = tf2.getText();
+					bgm.stop();
 					Battel battle = new Battel(player, rival);
 					battle.setVisible(true);
 					setVisible(false);
