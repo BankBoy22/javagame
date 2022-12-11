@@ -92,13 +92,6 @@ public class NickName extends JFrame{
 			}
 		});
 
-
-		
-		
-
-		
-		
-		
 		
 		setVisible(true);
 	}

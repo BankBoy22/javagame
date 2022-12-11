@@ -105,6 +105,7 @@ public class Pokemonster {
         //체력이 자신의 최대 체력이면 회복할 수 없다는 메세지 출력
         if (this.hp == maxHp) {
             System.out.println("체력이 이미 최대치입니다.");
+            JOptionPane.showMessageDialog(null, this.name + "의 체력은 이미 최대치이다.");
         }
         //체력이 100이 아니면
         else {
