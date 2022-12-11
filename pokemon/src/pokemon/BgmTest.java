@@ -16,8 +16,8 @@ public class BgmTest{
     
     
     public BgmTest(String pathName, boolean isloop) {
+        this.isLoop = isloop;
         try {
-            
             clip = AudioSystem.getClip();
             audioFile = new File(pathName);
             audioInputStream = AudioSystem.getAudioInputStream(audioFile);
